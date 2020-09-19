@@ -1,0 +1,99 @@
+@startuml classdiagram
+
+Skinparam Style strictuml
+Skinparam PackageStyle rectangle
+skinparam handwritten true
+
+class CustomerUI
+{
+    +string Name
+    +int PhoneNumber
+    -Place Order()
+    -Payment()
+}
+
+class RMS
+{
+    -confirmOrder()
+    -addBooking()
+    -getStaff()
+}
+
+class StaffUI
+{
+    -selectWaiter()
+    -selectChef()
+}
+
+class Staff
+{
+    -string Name
+    -int Id
+    -string jobType
+    -int NumOfCustomers
+}
+
+class Waiter
+{
+    -ServesFood()
+    -TakesFeedback()
+}
+
+class Chef
+{
+    -MarkEstimatedTime()
+}
+
+CustomerUI "*" -- "1" RMS: Interacts
+StaffUI "*" -- "1" RMS: Interacts
+Booking "*" -- "1" RMS: Interacts
+StaffUI "*" -- "*" Staff: Accesses
+Report "*" -- "1" Manager: Supervises
+Report "*" -- "1" RMS: Generates
+note "{One Staff Member must not work upon more than 3 customers}" as N1
+StaffUI .. N1
+N1 .. Staff
+
+Staff <|-- Waiter
+Staff <|-- Chef
+Waiter <|-- Manager
+
+class Booking
+{
+    +int BookingId
+    +string Type
+    +boolean DineIn
+    +string date
+    +int time
+    +int numPersons
+    -setBooking()
+    -viewBooking()
+    -getPrice()
+}
+
+Table "1..*" -- "1" Booking: SetsReservation
+
+class Table
+{
+    +int tableNumber
+    +int numberofSeats
+    +boolean Occupied
+    +string SpecialRequest
+    -setOccupied()
+    -getOccupied()
+    -setSpecialRequest()
+}
+
+class Manager
+{
+    -requestsFeedback()
+    -OverviewsReports()
+}
+
+class Report
+{
+    -int BillNo.
+    -boolean Served
+}
+
+@enduml
