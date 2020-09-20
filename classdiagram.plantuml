@@ -27,10 +27,10 @@ class StaffUI
 
 class Staff
 {
-    -string Name
-    -int Id
-    -string jobType
-    -int NumOfCustomers
+    +string Name
+    +int Id
+    +string jobType
+    +int NumOfCustomers
 }
 
 class Waiter
@@ -92,8 +92,8 @@ class Manager
 
 class Report
 {
-    -int BillNo.
-    -boolean Served
+    +int BillNo.
+    +boolean Served
 }
 
 @enduml
