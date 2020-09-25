@@ -1,0 +1,45 @@
+@startuml
+
+skinparam Linetype ortho
+
+
+[Restaurant\nManagement \nSystem Server] 
+
+database "Staff Database" {
+  Interface1 - [Waiters Info]
+  Interface1 - [Chef Info]
+}
+
+database "Customer Database" {
+  Interface2 - [Membership Customer]
+  Interface2 - [New Customer]
+}
+
+package "Utilities"{
+    Component "Data Processing"
+}
+
+Interface "File Transfer Protocol" as FP
+
+package "User Interface" {
+    HTTP - [WebApplication]
+}
+
+package "Report Generation" {
+    [Report]
+}
+
+cloud "Payment Gateway"{
+    Component "Payment Report" as PR
+}
+
+[Restaurant\nManagement \nSystem Server] --left..> FP : <<use>>
+[Restaurant\nManagement \nSystem Server] --left..> FP : <<use>>
+[Restaurant\nManagement \nSystem Server] ..> Utilities : <<Resides>>
+FP ..> Interface1 : <<use>>
+FP ..> Interface2 : <<use>> 
+HTTP ..> [Restaurant\nManagement \nSystem Server] : <<use>>
+Report -->  [Restaurant\nManagement \nSystem Server] : <<use>>
+Report  .right.> PR : <<uses>>
+
+@enduml
