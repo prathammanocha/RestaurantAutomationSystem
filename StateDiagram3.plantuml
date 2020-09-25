@@ -1,0 +1,16 @@
+@startuml State Diagram 3
+
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+hide empty description
+
+[*] --> Manager
+Manager --> Customer : Requests Feedback
+Customer --> Manager : Gives Feedback
+Customer --> Table : Requests Clearance
+StaffUI --> Table : Fulfills Request
+StaffUI --> ReservationDatabase 
+ReservationDatabase --> [*] : Table Ready\nFor Next\nReservation\nRequest
+
+
+@enduml

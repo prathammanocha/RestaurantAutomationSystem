@@ -1,0 +1,52 @@
+@startuml usecase
+
+Skinparam Style strictuml
+left to right direction
+Skinparam PackageStyle rectangle
+
+actor Customer
+
+actor KitchenStaff
+
+actor OrderDatabase
+
+actor Waiter
+
+actor ReservationDatabase
+
+rectangle Resturant{
+   Customer -- (Manage Reservation)
+   KitchenStaff -- (Manage Order)
+   OrderDatabase -- (Update Orders)
+   (Manage Reservation) <|-down- (Make a reservation)
+   (Manage Reservation) <|-down- (Modify a reservation)
+   (Manage Reservation) .> (Update Reservations) : <<include>>
+   (Update Reservations) -- ReservationDatabase
+   (Modify a reservation) .down.> (Change Seat) : <<include>>
+   (Modify a reservation) .down.> (Change Order) : <<include>>
+   (Modify a reservation) .down.> (Delete Reservation) : <<include>>
+   (Modify a reservation) <.. (Display too late to change) : <<extends>>
+   (Make a reservation) .down.> (Select table) : <<include>>
+   (Select table) .down.> (Enter name and contact) : <<include>>
+   (Make a reservation) .down.> (Select order) : <<include>>
+   (Select order) .down.> (Browse Menu): <<include>>
+   (Select order) .down.> (Special Request): <<include>>
+   (Manage Order) <|-- (Mark Order as Done)
+   (Manage Order) <|-- (View Orders)
+   (Manage Order) .down.> (Update Orders): <<include>>
+   (Make a reservation) .> (Make Payment) : <<include>>
+   Waiter -left- (Manage Customer Reservation)
+   (Manage Customer Reservation) <|-down- (View Customer Reservaion)
+   (Manage Customer Reservation) <|-down- (Mark Customer as arrived)
+   (Mark Customer as arrived) .down.> (Add Customer Info to Order Database) : <<include>>
+   OrderDatabase -- (Add Customer Info to Order Database)
+   (Mark Customer as arrived) .up.> (Update Reservation) : <<include>>
+
+}
+
+
+
+
+
+
+@enduml

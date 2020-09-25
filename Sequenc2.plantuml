@@ -1,0 +1,52 @@
+@startuml
+
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+
+"Customer" ->> "Reservation Database" : makes reservation
+
+Customer ->> "Reservation Database" : change table
+
+"Reservation Database" ->> "Reservation Database" : Check if possible
+
+"Reservation Database" ->> Customer : Table Changed
+
+Customer ->> "Waiter" : Request Menu
+
+"Waiter" ->> Customer : Provide Menu
+
+Customer ->> Customer : Browse Menu
+
+Customer ->> "Waiter" : Place order
+
+"Waiter" ->> "Order Database" : Update Order
+
+Customer ->> "Waiter" : Make a Special Request in the order
+
+"Waiter" ->> "Order Database" : Update Order
+
+
+"Waiter" ->> Customer : Special Request Confirmed
+
+
+"Order Database" ->> Kitchenstaff : Provide Order Details
+
+Kitchenstaff ->> Kitchenstaff :Prepare Order
+
+Kitchenstaff ->> "Order Database" : Update order
+
+"Order Database" ->> Waiter : Order to Deliver
+
+Waiter ->> Customer : Deliver Food
+
+Customer ->> Customer : Eat Food
+
+Customer ->> "Waiter" : Make Payment
+
+Waiter ->> "Order Database" : Update Order
+
+Customer ->> Waiter :"Give tip"
+
+
+
+@enduml

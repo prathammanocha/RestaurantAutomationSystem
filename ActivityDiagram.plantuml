@@ -1,0 +1,90 @@
+@startuml Activity Diagram
+
+title __Restaurant Automation System__
+
+|Customer|
+
+start
+:Makes\nReservation\nRequest;
+
+|CustomerUI|
+:Process\nReservation\nRequest;
+
+|ReservationDatabase|
+:Validate\nReservation\nRequest;
+
+|StaffUI|
+:Customer Arrives;
+
+|ReservationDatabase|
+:Sets Table;
+
+|StaffUI|
+:Sets Reservation;
+:Sets Table;
+
+|Customer|
+:Request\nTable\nChange;
+
+|ReservationDatabase|
+if(Is it Possible?) then([Possible])
+
+else ([Not Possible])
+:Processing Request;
+:Waiting List;
+:Request Fulfilled;
+endif
+:Table Changed;
+
+|Customer|
+:Requests Menu;
+
+|Waiter|
+:Provides Menu;
+
+|Customer|
+:Places Order;
+:Makes\nSpecial\nRequests;
+
+|Waiter|
+:Enters\nDetailed\nOrder;
+
+|OrderDatabase|
+:Provides\nOrder\nDetails;
+
+|KitchenStaff|
+:Prepares Order;
+
+|OrderDatabase|
+:Order Prepared;
+
+|Waiter|
+:Serves\nOrdered\nFood;
+
+|Customer|
+:Eats Food;
+:Makes Payment;
+
+|Waiter|
+:Returns Change;
+
+|Customer|
+:Leaves Tip;
+
+|Manager|
+:Requests Feedback;
+
+|Customer|
+:Gives Feedback;
+
+|Table|
+:Requests Clearance;
+
+|StaffUI|
+:Cleans Table;
+
+|ReservationDatabase|
+:Table Ready\nFor Next\nReservation\nRequest;
+
+stop
+@enduml

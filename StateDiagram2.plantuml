@@ -1,0 +1,25 @@
+@startuml State Diagram 2
+
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+hide empty description
+
+[*] --> Customer
+Customer --> Waiter : Places\nOrder
+Customer --> Waiter : Makes\nSpecial\nRequests
+Waiter --> OrderDatabase : Enters\nDetailed\nOrder
+OrderDatabase  -->  KitchenStaff : Provides\nOrder\nDetails
+KitchenStaff --> OrderDatabase : Prepares Order
+OrderDatabase -->  Waiter : Order Prepared
+Waiter --> Customer : Serves\nOrdered\nFood
+Customer  --> Customer : Eats Food
+Customer --> Waiter : Makes Payment
+Waiter --> Customer : Returns Change
+Customer --> Waiter : Leaves Tip
+Customer --> [*] 
+note right of Customer
+After leaving tip and collecting change Customer leaves the restaurant
+end note
+
+
+@enduml

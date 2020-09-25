@@ -1,0 +1,47 @@
+@startuml
+
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+
+Actor Staff as st
+
+st ->> StaffInterface : Navigate
+
+StaffInterface ->> Reservation : setReservation
+
+Reservation ->> Table : setTable
+
+StaffInterface ->> Reservation: setArrived
+
+Table ->> Order : setOrder
+
+Order ->> Food : setFood
+
+Food --> Order : sendFoodinfo
+
+Order --> Table : sendOrderInfo
+
+Table --> Reservation : sendTableInfo
+
+StaffInterface ->> Food : setCooked
+
+Food --> StaffInterface : notify Copleted
+
+StaffInterface ->> Food : setCollected
+
+StaffInterface ->> Table : Deliver Order
+
+StaffInterface ->> Reservation : Set Delivered
+
+
+Reservation --> StaffInterface : RequestPayment
+
+StaffInterface ->> Reservation : Add Payment  Info
+
+Reservation --> StaffInterface : Confirm Payment
+
+StaffInterface ->> Table :Clean Table
+
+StaffInterface ->> Reservation : TableReady
+
+@enduml

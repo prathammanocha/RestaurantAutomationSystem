@@ -1,0 +1,25 @@
+@startuml
+
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+
+actor Customer as Cm
+
+Cm ->> CustomerUI : navigate
+
+CustomerUI ->> Reservation : setReservation
+
+Reservation ->> Table : setTable
+
+Table ->> Order : setOrder
+
+Order ->> Food : setFood
+
+Food --> Order : sendFoodinfo
+
+Order ->> Reservation :SendOrderInfo
+
+Reservation --> CustomerUI : requestPayment
+
+CustomerUI ->> Reservation : makePayment
+@enduml

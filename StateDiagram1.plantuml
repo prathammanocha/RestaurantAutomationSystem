@@ -1,0 +1,42 @@
+@startuml State Diagram 1
+
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+hide empty description
+
+[*] --> Customer
+State "CustomerUI" as CUI
+Customer -right-> CUI : Makes Reservation Request
+Customer --> [*] : Cancels Request
+state "Request Table Change" as RTC
+Customer --> RTC 
+
+state "ReservationDatabase" as RD  
+CUI --> RD : Process Reservation Request
+CUI --> [*] : Cancels Request
+
+state "Table Changed" as TC
+RD --> TC  : [Change possible]
+state "Processing Request" as PR
+RD --> PR : [Change not possible]
+state "Waiting List" as WL
+PR --> WL 
+state "Request Fulfilled" as RF
+WL --> RF
+RF --> TC
+
+
+state "StaffUI" as SUI 
+RD -left-> SUI : Validate Reservation Request
+SUI -left-> RD : Customer Arrives
+RD --> [*] : Cancels Request
+
+state "Sets Table" as ST 
+RD -right-> ST 
+SUI -right-> ST
+
+State "Sets Reservation" as SR
+SUI -right-> SR
+
+
+@enduml
