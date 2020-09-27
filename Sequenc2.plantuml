@@ -1,15 +1,15 @@
-@startuml
+@startuml Sequenc2
 
 skinparam Style strictuml
 skinparam SequenceMessageAlignment center
 
-"Customer" ->> "Reservation Database" : makes reservation
+"Customer" ->> "Reservation System" : makes reservation
 
-Customer ->> "Reservation Database" : change table
+Customer ->> "Reservation System" : change table
 
-"Reservation Database" ->> "Reservation Database" : Check if possible
+"Reservation System" ->> "Reservation System" : Check if possible
 
-"Reservation Database" ->> Customer : Table Changed
+"Reservation System" ->> Customer : Table Changed
 
 Customer ->> "Waiter" : Request Menu
 
@@ -19,23 +19,23 @@ Customer ->> Customer : Browse Menu
 
 Customer ->> "Waiter" : Place order
 
-"Waiter" ->> "Order Database" : Update Order
+"Waiter" ->> "Order System" : Update Order
 
 Customer ->> "Waiter" : Make a Special Request in the order
 
-"Waiter" ->> "Order Database" : Update Order
+"Waiter" ->> "Order System" : Update Order
 
 
 "Waiter" ->> Customer : Special Request Confirmed
 
 
-"Order Database" ->> Kitchenstaff : Provide Order Details
+"Order System" ->> Kitchenstaff : Provide Order Details
 
 Kitchenstaff ->> Kitchenstaff :Prepare Order
 
-Kitchenstaff ->> "Order Database" : Update order
+Kitchenstaff ->> "Order System" : Update order
 
-"Order Database" ->> Waiter : Order to Deliver
+"Order System" ->> Waiter : Order to Deliver
 
 Waiter ->> Customer : Deliver Food
 
@@ -43,7 +43,7 @@ Customer ->> Customer : Eat Food
 
 Customer ->> "Waiter" : Make Payment
 
-Waiter ->> "Order Database" : Update Order
+Waiter ->> "Order System" : Update Order
 
 Customer ->> Waiter :"Give tip"
 
