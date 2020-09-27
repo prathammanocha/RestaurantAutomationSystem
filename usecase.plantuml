@@ -8,20 +8,20 @@ actor Customer
 
 actor KitchenStaff
 
-actor OrderDatabase
+actor OrderSystem
 
 actor Waiter
 
-actor ReservationDatabase
+actor ReservationSystem
 
 rectangle Resturant{
    Customer -- (Manage Reservation)
    KitchenStaff -- (Manage Order)
-   OrderDatabase -- (Update Orders)
+   OrderSystem -- (Update Orders)
    (Manage Reservation) <|-down- (Make a reservation)
    (Manage Reservation) <|-down- (Modify a reservation)
    (Manage Reservation) .> (Update Reservations) : <<include>>
-   (Update Reservations) -- ReservationDatabase
+   (Update Reservations) -- ReservationSystem
    (Modify a reservation) .down.> (Change Seat) : <<include>>
    (Modify a reservation) .down.> (Change Order) : <<include>>
    (Modify a reservation) .down.> (Delete Reservation) : <<include>>
@@ -39,7 +39,7 @@ rectangle Resturant{
    (Manage Customer Reservation) <|-down- (View Customer Reservaion)
    (Manage Customer Reservation) <|-down- (Mark Customer as arrived)
    (Mark Customer as arrived) .down.> (Add Customer Info to Order Database) : <<include>>
-   OrderDatabase -- (Add Customer Info to Order Database)
+   OrderSystem -- (Add Customer Info to Order Database)
    (Mark Customer as arrived) .up.> (Update Reservation) : <<include>>
 
 }
