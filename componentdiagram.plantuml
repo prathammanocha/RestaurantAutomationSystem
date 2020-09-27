@@ -3,26 +3,24 @@
 skinparam Linetype ortho
 
 
-[Restaurant\nManagement \nSystem Server] 
+[Restaurant\nManagement \nSystem Server] as RMS
 
-database "Staff Database" {
-  Interface1 - [Waiters Info]
-  Interface1 - [Chef Info]
+database "Staff Database" as SD {
+  [Waiters Info]
+  [Chef Info]
 }
 
-database "Customer Database" {
-  Interface2 - [Membership Customer]
-  Interface2 - [New Customer]
+database "Customer Database" as CD {
+   [Membership Customer]
+   [New Customer]
 }
 
 package "Utilities"{
     Component "Data Processing"
 }
 
-Interface "File Transfer Protocol" as FP
-
-package "User Interface" {
-    HTTP - [WebApplication]
+package "User Interface" as UI{
+    [WebApplication]
 }
 
 package "Report Generation" {
@@ -33,13 +31,11 @@ cloud "Payment Gateway"{
     Component "Payment Report" as PR
 }
 
-[Restaurant\nManagement \nSystem Server] --left..> FP : <<use>>
-[Restaurant\nManagement \nSystem Server] --left..> FP : <<use>>
-[Restaurant\nManagement \nSystem Server] ..> Utilities : <<Resides>>
-FP ..> Interface1 : <<use>>
-FP ..> Interface2 : <<use>> 
-HTTP ..> [Restaurant\nManagement \nSystem Server] : <<use>>
-Report -->  [Restaurant\nManagement \nSystem Server] : <<use>>
-Report  .right.> PR : <<uses>>
+RMS ..> Utilities : <<Resides>>
+RMS -(0- CD : File Transfer Protocol
+RMS -(0- SD : File Transfer Protocol
+UI -(0- RMS : <<HTTP>>
+Report -(0-  RMS : <<use>>
+Report -left-> PR : <<uses>>
 
 @enduml
